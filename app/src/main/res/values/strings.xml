@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">KJWanAndroid</string>
+    <string name="wechat">Wechat</string>
+    <string name="android">Android</string>
+    <string name="kotlin">Kotlin</string>
+    <string name="flutter">Flutter</string>
+</resources>

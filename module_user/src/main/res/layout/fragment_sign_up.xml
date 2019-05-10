@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="kylec.me.user.ui.module.UserViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorTheme"
+        tools:context="kylec.me.user.ui.interfaces.SignUpFragment">
+
+        <kylec.me.base.view.TitleLayout
+            android:id="@+id/titleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:iconTint="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showLine="false"
+            app:textColor="@android:color/white"
+            app:title="注册" />
+
+        <EditText
+            android:id="@+id/etUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:background="@drawable/bg_login_edit"
+            android:hint="@string/user_name"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="12dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/colorWindowBackground"
+            app:layout_constraintBottom_toTopOf="@+id/etPassword"
+            app:layout_constraintTop_toBottomOf="@+id/titleLayout"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:ignore="Autofill" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:background="@drawable/bg_login_edit"
+            android:digits="@string/digits"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:padding="12dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/colorWindowBackground"
+            app:layout_constraintBottom_toTopOf="@+id/confirmPassword"
+            app:layout_constraintTop_toBottomOf="@+id/etUserName"
+            tools:ignore="Autofill" />
+
+        <EditText
+            android:id="@+id/confirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:background="@drawable/bg_login_edit"
+            android:digits="@string/digits"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:padding="12dp"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/colorWindowBackground"
+            app:layout_constraintBottom_toTopOf="@+id/signUpButton"
+            app:layout_constraintTop_toBottomOf="@+id/etPassword"
+            tools:ignore="Autofill" />
+
+        <Button
+            android:id="@+id/signUpButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="36dp"
+            android:background="@drawable/bg_login_button"
+            android:text="@string/sign_up"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleGone="@{viewModel.isLoading}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

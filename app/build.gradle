@@ -1,0 +1,136 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+
+    compileSdkVersion versions.compileSdkVersion
+
+    defaultConfig {
+        applicationId "kylec.me.kjwanandroid"
+
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        versionCode versions.versionCode
+        versionName versions.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = "kjwanandroid-${defaultConfig.versionName}-${releaseTime()}.apk"
+        }
+    }
+
+    // 签名配置
+    signingConfigs {
+        // 测试版本签名配置
+        debug {
+            v1SigningEnabled true
+            v2SigningEnabled true
+            keyAlias 'key'
+            keyPassword 'ck985985'
+            storeFile file('C:/Users/kylec/kylechan.jks')
+            storePassword 'ck985985'
+        }
+
+        // 发布版本签名配置
+        release {
+            v1SigningEnabled true
+            v2SigningEnabled true
+            keyAlias 'key'
+            keyPassword 'ck985985'
+            storeFile file('C:/Users/kylec/kylechan.jks')
+            storePassword 'ck985985'
+        }
+    }
+
+    // 环境配置
+    buildTypes {
+        // 测试环境配置
+        debug {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            debuggable true
+        }
+
+        // 发布环境配置
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            zipAlignEnabled true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    // 打包时的相关配置
+    packagingOptions {
+        // merges合并 当出现重复文件时 合并重复的文件 然后打包入apk
+        merge 'META-INF/LICENSE'
+        // 去除重复文件
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        // RX JAVA 冲突
+        exclude 'META-INF/rxjava.properties'
+
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
+
+    // 程序在编译的时候会检查lint,有任何错误提示会停止build
+    lintOptions {
+        // lint 遇到 error 时不继续 构建
+        abortOnError true
+        // build release 版本 时 开启lint 检测
+        checkReleaseBuilds true
+        // 防止发布时因MissingTranslation导致Build Failed
+        disable 'MissingTranslation'
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+}
+
+kapt {
+    generateStubs = true
+
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':module_base')
+    kapt kaptLibs
+
+    if (isModule.toBoolean()) {
+        implementation project(':module_user')
+        implementation project(':module_wan')
+    }
+}
+
+static def releaseTime() {
+    return new Date().format("yyyy-MM-dd",TimeZone.getTimeZone("UTC"))
+}

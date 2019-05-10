@@ -1,0 +1,120 @@
+ext {
+
+    // TRUE: EVERY MODULE RUN AS LIB
+    // FALSE: EVERY MODULE CAN RUN ALONE
+    isModule = true
+
+    versions = [
+            // SDK AND TOOLS
+            compileSdkVersion  : 28,
+            minSdkVersion      : 21,
+            targetSdkVersion   : 28,
+            versionCode        : 1,
+            versionName        : "1.2",
+
+            // ANDROIDX
+            appcompat          : '1.0.2',
+            constraintlayout   : '1.1.3',
+            legacy             : '1.0.0',
+            materialdesign     : '1.0.0',
+            ktx                : '1.0.1',
+
+            // JetPack
+            lifecycle          : '2.0.0',
+            lifecycle_alpha    : '2.1.0-alpha04',
+            paging             : '2.1.0',
+            navigation         : '2.0.0',
+
+            // TEST
+            junit              : '4.12',
+            espresso           : '3.1.1',
+            runner             : '1.1.1',
+
+            kotlin             : '1.3.31',
+
+            // THIRD PART
+            glide              : '4.9.0',
+
+            rxjava             : '2.2.8',
+            rxandroid          : '2.1.1',
+            rxkotlin           : '2.3.0',
+            rxbinding          : '3.0.0-alpha2',
+            retrofit           : '2.5.0',
+            logging_interceptor: '3.9.0',
+            persistentcookie   : 'v1.0.1',
+
+            arouterApi         : '1.4.1',
+            arouterCompiler    : '1.2.2',
+
+            kodein             : '6.2.0',
+            coroutines         : '1.2.0',
+
+            krealmextensions   : '2.5.0'
+    ]
+
+    // BASIC ANDROID DEP
+    androidXs = [
+            "appcompat"       : "androidx.appcompat:appcompat:$versions.appcompat",
+            // 依赖了这个后RecyclerView CardView啥的都不需要再依赖了
+            "legacy"          : "androidx.legacy:legacy-support-v4:$versions.legacy",
+            "constraintlayout": "androidx.constraintlayout:constraintlayout:$versions.constraintlayout",
+            "kotlin"          : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin",
+            "materialdesign"  : "com.google.android.material:material:$versions.materialdesign"
+    ]
+
+    jetpacks = [
+            "lifecycle_extensions"  : "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle",
+            "lifecycle_viewmodel"   : "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle_alpha",
+            "lifecycle_runtime"     : "androidx.lifecycle:lifecycle-runtime:$versions.lifecycle",
+            "lifecycle_common_java8": "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle",
+
+            "navigation_fragment"   : "androidx.navigation:navigation-fragment-ktx:$versions.navigation",
+            "navigaton_ui"          : "androidx.navigation:navigation-ui-ktx:$versions.navigation",
+
+            "paging"                : "androidx.paging:paging-runtime:$versions.paging"
+    ]
+
+    // TESTING DEP
+    tests = [
+            "runner"       : "androidx.test:runner:$versions.runner",
+            "espresso_core": "androidx.test.espresso:espresso-core:$versions.espresso",
+            "juint"        : "junit:junit:$versions.junit"
+    ]
+
+    // THIRD PART
+    implementations = [
+            "glide"                       : "com.github.bumptech.glide:glide:$versions.glide",
+
+            "arouter"                     : "com.alibaba:arouter-api:$versions.arouterApi",
+
+            "kodeincore"                  : "org.kodein.di:kodein-di-core-jvm:$versions.kodein",
+            "kodeingeneric"               : "org.kodein.di:kodein-di-generic-jvm:$versions.kodein",
+            "kodeinandroidx"              : "org.kodein.di:kodein-di-framework-android-x:$versions.kodein",
+
+            "coroutinescore"              : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines",
+            "coroutinesandroid"           : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines",
+
+            "rxjava"                      : "io.reactivex.rxjava2:rxjava:$versions.rxjava",
+            "rxandroid"                   : "io.reactivex.rxjava2:rxandroid:$versions.rxandroid",
+            "rxkotlin"                    : "io.reactivex.rxjava2:rxkotlin:$versions.rxkotlin",
+            "rxbinding"                   : "com.jakewharton.rxbinding3:rxbinding:$versions.rxbinding",
+            "retrofit"                    : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+            "retrofit_converter_gson"     : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+            "retrofit_logging_interceptor": "com.squareup.okhttp3:logging-interceptor:$versions.logging_interceptor",
+            "persistentcookie"            : "com.github.franmontiel:PersistentCookieJar:$versions.persistentcookie",
+
+            "krealmextensions"            : "com.github.vicpinm:krealmextensions:$versions.krealmextensions"
+    ]
+
+    kapts = [
+            "arouter_compiler"  : "com.alibaba:arouter-compiler:$versions.arouterCompiler",
+            "lifecycle_compiler": "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle",
+            "glide_compiler"    : "com.github.bumptech.glide:compiler:$versions.glide"
+    ]
+
+    androidXLibs = androidXs.values()
+    jetpackLibs = jetpacks.values()
+    implementationLibs = implementations.values()
+    testLibs = tests.values()
+    kaptLibs = kapts.values()
+}
