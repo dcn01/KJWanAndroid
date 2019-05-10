@@ -1,5 +1,6 @@
 package kylec.me.user.ui.module
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,13 +24,26 @@ class UserViewModel(private val repo: UserRepository) : BaseViewModule() {
 
     var isLoading = MutableLiveData<Boolean>()
 
+    var username = MutableLiveData<String>()
+
+    var logout = MutableLiveData<String>()
+
     val loginErrMsg: LiveData<String>
         get() = _loginErrMsg
 
     val signUpErrMsg: LiveData<String>
         get() = _signUpErrMsg
 
-    fun login(username: String, password: String) {
+    init {
+        isLoading.value = false
+    }
+
+    override fun onResume(owner: LifecycleOwner) {
+        super.onResume(owner)
+        username.value = UserConfig.currentUser?.username ?: "去登录"
+    }
+
+    fun login(username: String, password: String) =
         launch({
             repo.login(username, password).process(
                 // the login request is successful
@@ -44,24 +58,25 @@ class UserViewModel(private val repo: UserRepository) : BaseViewModule() {
 
             // this error is http connect failed, such as `no network`.
         }, { _loginErrMsg.value = it.message })
-    }
 
-    fun signUp(username: String, password: String, repassword: String) {
+    fun signUp(username: String, password: String, rePassword: String) =
+        // same as login
         launch({
-            repo.signUp(username, password, repassword).process(
+            repo.signUp(username, password, rePassword).process(
                 { _signUpErrMsg.value = STRING_BLANK },
                 { errMsg -> _signUpErrMsg.value = errMsg }
             )
         }, { _signUpErrMsg.value = it.message })
-    }
 
-    fun logout() {
+    fun logout() =
+        // same as login
         launch({
-            repo.logout()
-        }, {})
-    }
+            repo.logout().process(
+                { logout.value = STRING_BLANK },
+                { logout.value = it })
+        }, { logout.value = it.message })
 
-    private fun launch(block: suspend () -> Unit, error: suspend (Throwable) -> Unit) =
+    private fun launch(block: suspend () -> Unit, error: suspend (Throwable) -> Unit = {}) =
         viewModelScope.launch {
             try {
                 isLoading.value = true

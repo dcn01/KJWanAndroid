@@ -17,10 +17,8 @@ class UserRepositoryImpl : UserRepository {
     override suspend fun signUp(
         username: String,
         password: String,
-        repassword: String
-    ) = loginService.signUpAsync(username, password, repassword).await()
+        rePassword: String
+    ) = loginService.signUpAsync(username, password, rePassword).await()
 
-    override suspend fun logout() {
-        loginService.logoutAsync().await()
-    }
+    override suspend fun logout() = loginService.logoutAsync().await()
 }

@@ -1,6 +1,7 @@
 package kylec.me.base.extend
 
 import android.view.View
+import androidx.annotation.IdRes
 import com.google.android.material.snackbar.Snackbar
 
 /**
@@ -24,3 +25,5 @@ fun View.visible(isVisible: Boolean) {
 }
 
 fun View.snack(msg: String) = Snackbar.make(this, msg, Snackbar.LENGTH_SHORT).show()
+
+inline fun <reified T : View> View.find(@IdRes id: Int): T = findViewById(id)

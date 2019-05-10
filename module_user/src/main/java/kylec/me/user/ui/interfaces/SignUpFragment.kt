@@ -27,7 +27,7 @@ class SignUpFragment : BaseUserFragment<FragmentSignUpBinding, UserViewModel>() 
 
     override fun initViewModel() = userViewModel
 
-    override fun initDataAfterViewSet(view: View) {
+    override fun initDataAfterViewCreated(view: View) {
         binding.viewModel = userViewModel
 
         val o1 = etUserName.textChanges()

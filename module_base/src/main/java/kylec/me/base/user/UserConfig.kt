@@ -13,7 +13,7 @@ object UserConfig {
     private const val KEY_USERNAME = "loginUserName"
     private const val KEY_TOKEN = "token_pass"
 
-    private var currentUser: User? = null
+    var currentUser: User? = null
 
     var isLogin: Boolean = false
         get() {

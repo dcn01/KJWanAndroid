@@ -10,7 +10,7 @@ interface UserRepository {
 
     suspend fun login(username: String, password: String): HttpReturnType<User>
 
-    suspend fun signUp(username: String, password: String, repassword: String): HttpReturnType<User>
+    suspend fun signUp(username: String, password: String, rePassword: String): HttpReturnType<User>
 
-    suspend fun logout()
+    suspend fun logout(): HttpReturnType<User>
 }

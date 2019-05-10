@@ -12,16 +12,13 @@ import android.widget.TextView
 import android.widget.Toast
 
 /**
- * Toast扩展函数
+ * Toast Ex Func
  *
  * Created by KYLE on 2019/5/8 - 9:32
  */
 
 private var toast: Toast? = null
 
-/**
- * 短时间显示Toast
- */
 @SuppressLint("ShowToast")
 fun Context.toastShort(message: CharSequence?, gravity: Int = Gravity.BOTTOM) {
     message?.let {
@@ -36,9 +33,6 @@ fun Context.toastShort(message: CharSequence?, gravity: Int = Gravity.BOTTOM) {
     }
 }
 
-/**
- * 长时间显示Toast
- */
 @SuppressLint("ShowToast")
 fun Context.toastLong(message: CharSequence?, gravity: Int = Gravity.BOTTOM) {
     message?.let {
@@ -53,9 +47,6 @@ fun Context.toastLong(message: CharSequence?, gravity: Int = Gravity.BOTTOM) {
     }
 }
 
-/**
- * 自定义显示Toast时间
- */
 @SuppressLint("ShowToast")
 fun Context.toastShowDiy(message: CharSequence?, duration: Int, gravity: Int = Gravity.BOTTOM) {
     message?.let {
@@ -70,9 +61,6 @@ fun Context.toastShowDiy(message: CharSequence?, duration: Int, gravity: Int = G
     }
 }
 
-/**
- * 设置Toast样式
- */
 private fun setToastStyle() {
     val view = toast!!.view
     if (null != view) {
@@ -85,7 +73,8 @@ private fun setToastStyle() {
     }
 }
 
-/* 官方Toast布局样式
+/* Toast Layout Style:
+*
 * <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 *   android:layout_width="match_parent"
 *   android:layout_height="match_parent"

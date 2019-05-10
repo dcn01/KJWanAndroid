@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.jakewharton.rxbinding3.widget.textChanges
-import kylec.me.user.Router
-import kylec.me.user.ui.module.UserViewModel
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
 import kotlinx.android.synthetic.main.fragment_login.*
+import kylec.me.user.Router
+import kylec.me.user.ui.module.UserViewModel
 import kylec.me.base.extend.content
 import kylec.me.user.R
 import kylec.me.user.databinding.FragmentLoginBinding
@@ -29,7 +29,7 @@ class LoginFragment : BaseUserFragment<FragmentLoginBinding, UserViewModel>() {
 
     override fun initViewModel() = userViewModel
 
-    override fun initDataAfterViewSet(view: View) {
+    override fun initDataAfterViewCreated(view: View) {
         binding.viewModel = userViewModel
 
         val o1 = etUserName.textChanges()

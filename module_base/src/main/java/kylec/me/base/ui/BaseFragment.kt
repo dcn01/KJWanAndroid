@@ -45,7 +45,7 @@ abstract class BaseFragment : BaseAutoDisposeFragment(), View.OnTouchListener, K
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initDataAfterViewSet(view)
+        initDataAfterViewCreated(view)
     }
 
     protected inline fun <reified T : Activity> startActivity() {
@@ -76,5 +76,5 @@ abstract class BaseFragment : BaseAutoDisposeFragment(), View.OnTouchListener, K
      *
      * @param view current view
      */
-    protected open fun initDataAfterViewSet(view: View) {}
+    protected open fun initDataAfterViewCreated(view: View) {}
 }

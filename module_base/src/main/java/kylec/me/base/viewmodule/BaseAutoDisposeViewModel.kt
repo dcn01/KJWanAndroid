@@ -7,7 +7,7 @@ import io.reactivex.disposables.Disposable
 /**
  * Created by KYLE on 2019/5/8 - 22:05
  */
-abstract class AutoDisposeViewModel : ViewModel() {
+abstract class BaseAutoDisposeViewModel : ViewModel() {
 
     private val compositeDisposable
         by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) { CompositeDisposable() }
