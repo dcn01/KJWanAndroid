@@ -2,6 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="kylec.me.wan">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name="kylec.me.base.WanAndroidApp"
         android:allowBackup="false"

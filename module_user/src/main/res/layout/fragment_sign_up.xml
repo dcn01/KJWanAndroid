@@ -19,8 +19,8 @@
         android:background="@color/colorTheme"
         tools:context="kylec.me.user.ui.interfaces.SignUpFragment">
 
-        <kylec.me.base.view.TitleLayout
-            android:id="@+id/titleLayout"
+        <kylec.me.base.view.TitleView
+            android:id="@+id/titleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:iconTint="@android:color/white"
@@ -44,7 +44,7 @@
             android:textColor="@android:color/white"
             android:textColorHint="@color/colorWindowBackground"
             app:layout_constraintBottom_toTopOf="@+id/etPassword"
-            app:layout_constraintTop_toBottomOf="@+id/titleLayout"
+            app:layout_constraintTop_toBottomOf="@+id/titleView"
             app:layout_constraintVertical_chainStyle="packed"
             tools:ignore="Autofill" />
 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- banner_pageChangeDuration 切换过程的时间 -->
+    <!-- banner_pointAutoPlayAble 是否开启自动轮播 -->
+    <!-- banner_pointAutoPlayInterval 自动轮播间隔时间 -->
+    <!-- banner_pointContainerBackground 指示点容器背景 -->
+    <!-- banner_indicatorGravity 指示器位置 -->
+    <!-- banner_isNeedShowIndicatorOnOnlyOnePage 只有一页数据是否显示指示器 -->
+
+    <cn.bingoogolapple.bgabanner.BGABanner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:banner_aspectRatio="2.0"
+        app:banner_indicatorGravity="bottom"
+        app:banner_isNeedShowIndicatorOnOnlyOnePage="false"
+        app:banner_isNumberIndicator="false"
+        app:banner_pageChangeDuration="1000"
+        app:banner_pointAutoPlayAble="true"
+        app:banner_pointAutoPlayInterval="5000"
+        app:banner_pointContainerBackground="@android:color/transparent"
+        app:banner_transitionEffect="depth" />
+
+</FrameLayout>

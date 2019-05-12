@@ -22,8 +22,8 @@ class AppManager private constructor() {
 
     fun exit() {
         process()
-        android.os.Process.killProcess(android.os.Process.myPid())
-        System.exit(0)
+        // android.os.Process.killProcess(android.os.Process.myPid())
+        // System.exit(0)
     }
 
     private fun process() {

@@ -12,6 +12,7 @@ import kylec.me.base.common.currentTimeMillis
 import kylec.me.base.extend.snack
 import kylec.me.base.ui.BaseActivity
 import kylec.me.base.ui.BlankFragment
+import kylec.me.wan.ui.homepage.HomePageFragment
 import kotlin.properties.Delegates
 
 private const val COUNT_VIEW_PAGER_ITEM = 4
@@ -20,7 +21,7 @@ private const val COUNT_VIEW_PAGER_ITEM = 4
  * Created by KYLE on 2019/5/7 - 15:17
  */
 @Route(path = RouterPath.TO_MAIN)
-class MainActivity : BaseActivity() {
+class MainActivity(override val layoutId: Int = R.layout.activity_main) : BaseActivity() {
 
     private var isDrawerOpened = false
 
@@ -31,8 +32,6 @@ class MainActivity : BaseActivity() {
             drawerLayout.snack("再按一次返回键退出")
         }
     }
-
-    override fun getLayoutId() = R.layout.activity_main
 
     override fun initView() {
         initDrawerLayoutNavigation()
@@ -79,7 +78,7 @@ class MainActivity : BaseActivity() {
 
         override fun getItem(position: Int) =
             when (position) {
-                0 -> BlankFragment()
+                0 -> HomePageFragment()
                 1 -> BlankFragment()
                 2 -> BlankFragment()
                 else -> BlankFragment()

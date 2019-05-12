@@ -16,9 +16,13 @@ import java.net.URLDecoder
 import java.util.concurrent.TimeUnit
 
 /**
+ * User `NetModule` instated , by kd.
+ *
  * Created by KYLE on 2019/5/8 - 13:05
  */
+@Deprecated("use [NetModule] instated")
 object ServiceCreator {
+    //  use [NetModule] instated
 
     private const val BASE_URL = "https://www.wanandroid.com/"
 

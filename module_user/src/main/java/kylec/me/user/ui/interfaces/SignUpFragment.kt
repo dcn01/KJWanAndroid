@@ -6,18 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.jakewharton.rxbinding3.widget.textChanges
-import kylec.me.user.ui.module.UserViewModel
 import io.reactivex.Observable
 import io.reactivex.functions.Function3
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kylec.me.base.extend.content
 import kylec.me.user.R
 import kylec.me.user.databinding.FragmentSignUpBinding
+import kylec.me.user.ui.module.UserViewModel
 
 /**
  * Created by KYLE on 2019/5/8 - 14:47
  */
 class SignUpFragment : BaseUserFragment<FragmentSignUpBinding, UserViewModel>() {
+
+    companion object {
+        // const val KEY_USERNAME = "KEY_USERNAME"
+        // const val KEY_PASSWORD = "KEY_PASSWORD"
+    }
 
     override fun getViewId(
         inflater: LayoutInflater,
@@ -57,6 +62,8 @@ class SignUpFragment : BaseUserFragment<FragmentSignUpBinding, UserViewModel>() 
     }
 
     private fun toLogin() {
-        fragmentManager?.popBackStack()
+        fragmentManager?.apply {
+            repeat(backStackEntryCount) { popBackStack() }
+        }
     }
 }

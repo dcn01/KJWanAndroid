@@ -10,11 +10,11 @@ import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
 import kotlinx.android.synthetic.main.fragment_login.*
-import kylec.me.user.Router
-import kylec.me.user.ui.module.UserViewModel
 import kylec.me.base.extend.content
 import kylec.me.user.R
+import kylec.me.user.Router
 import kylec.me.user.databinding.FragmentLoginBinding
+import kylec.me.user.ui.module.UserViewModel
 
 /**
  * Created by KYLE on 2019/5/8 - 14:47

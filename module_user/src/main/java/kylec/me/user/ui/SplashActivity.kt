@@ -6,13 +6,12 @@ import kylec.me.user.Router
 import kylec.me.base.ui.BaseActivity
 import kylec.me.base.user.UserConfig
 import kylec.me.user.R
+import kylec.me.user.ui.interfaces.UserActivity
 
 /**
  * Created by KYLE on 2019/5/8 - 9:09
  */
-class SplashActivity : BaseActivity() {
-
-    override fun getLayoutId() = R.layout.activity_splash
+class SplashActivity(override val layoutId: Int = R.layout.activity_splash) : BaseActivity() {
 
     override fun initView() {
         hideSystemNavigationBar()
@@ -34,7 +33,7 @@ class SplashActivity : BaseActivity() {
         if (UserConfig.isLogin) {
             Router.startMainActivity()
         } else {
-            UserActivity.starter(this)
+            startActivity<UserActivity>()
         }
 
         finish()

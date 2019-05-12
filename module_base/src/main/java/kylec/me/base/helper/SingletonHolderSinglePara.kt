@@ -10,12 +10,12 @@ package kylec.me.base.helper
  *
  * Created by KYLE on 2019/5/8 - 16:07
  */
-open class SingletonHolderSingleArg<out T, in A>(private val creator: (A) -> T) {
+open class SingletonHolderSinglePara<out TARGET, in PARA>(private val creator: (PARA) -> TARGET) {
 
     @Volatile
-    private var instance: T? = null
+    private var instance: TARGET? = null
 
-    fun getInstance(arg: A): T =
+    fun getInstance(arg: PARA): TARGET =
         instance ?: synchronized(this) {
             instance ?: creator(arg).also {
                 instance = it

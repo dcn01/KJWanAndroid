@@ -2,10 +2,12 @@ package kylec.me.user.ui.module
 
 import kylec.me.user.repo.UserRepository
 import kylec.me.user.repo.UserRepositoryImpl
+import kylec.me.user.service.UserService
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
+import retrofit2.Retrofit
 
 /**
  * user module for kodein.
@@ -17,7 +19,11 @@ private const val NAME_USER_MODULE = "USER_MODULE"
 
 val userKodeinModule = Kodein.Module(NAME_USER_MODULE) {
 
-    bind<UserRepository>() with singleton { UserRepositoryImpl() }
+    bind<UserService>() with singleton {
+        instance<Retrofit>().create(UserService::class.java)
+    }
+
+    bind<UserRepository>() with singleton { UserRepositoryImpl(instance()) }
 
     bind() from singleton { UserViewModelFactory.getInstance(instance()) }
 

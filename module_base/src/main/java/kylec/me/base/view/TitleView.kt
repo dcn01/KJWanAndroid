@@ -9,14 +9,14 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import kotlinx.android.synthetic.main.layout_title.view.*
+import kotlinx.android.synthetic.main.layout_title_view.view.*
 import kylec.me.base.R
 import kylec.me.base.extend.visible
 
 /**
  * Created by KYLE on 2019/5/8 - 14:15
  */
-class TitleLayout @JvmOverloads constructor(
+class TitleView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -25,34 +25,34 @@ class TitleLayout @JvmOverloads constructor(
     attrs, defStyleAttr
 ) {
 
-    private var title: CharSequence? = ""
+    var title: CharSequence? = ""
         set(value) {
             field = value
-            toolbarTitle.text = title
+            titleContent.text = title
         }
 
     private var textColor = 0x333333
         set(value) {
             field = value
-            toolbarTitle.setTextColor(value)
+            titleContent.setTextColor(value)
         }
 
     private var iconTintColor: Int = 0x333333
         set(value) {
             field = value
-            toolbarBack.apply { tintIcon(this, value) }
+            titleBack.apply { tintIcon(this, value) }
         }
 
     private var showBack: Boolean = true
         set(value) {
             field = value
-            toolbarBack.visible(value)
+            titleBack.visible(value)
         }
 
     private var showLine: Boolean = true
         set(value) {
             field = value
-            toolbarLine?.visible(value)
+            titleDividerLine?.visible(value)
         }
 
     init {
@@ -60,29 +60,29 @@ class TitleLayout @JvmOverloads constructor(
     }
 
     private fun init(attrs: AttributeSet?) {
-        View.inflate(context, R.layout.layout_title, this)
+        View.inflate(context, R.layout.layout_title_view, this)
 
         attrs?.let {
-            val typedArray = context.obtainStyledAttributes(it, R.styleable.TitleLayout)
+            val typedArray = context.obtainStyledAttributes(it, R.styleable.TitleView)
             typedArray.apply {
-                title = getString(R.styleable.TitleLayout_title)
-                showBack = getBoolean(R.styleable.TitleLayout_showBack, true)
-                showLine = getBoolean(R.styleable.TitleLayout_showLine, true)
+                title = getString(R.styleable.TitleView_title)
+                showBack = getBoolean(R.styleable.TitleView_showBack, true)
+                showLine = getBoolean(R.styleable.TitleView_showLine, true)
                 textColor =
                     getColor(
-                        R.styleable.TitleLayout_textColor,
+                        R.styleable.TitleView_textColor,
                         ContextCompat.getColor(context, android.R.color.black)
                     )
                 iconTintColor =
                     getColor(
-                        R.styleable.TitleLayout_iconTint,
+                        R.styleable.TitleView_iconTint,
                         ContextCompat.getColor(context, android.R.color.black)
                     )
                 recycle()
             }
         }
 
-        toolbarBack.setOnClickListener { (context as Activity).onBackPressed() }
+        titleBack.setOnClickListener { (context as Activity).onBackPressed() }
     }
 
     private fun tintIcon(imageView: ImageView, colors: Int) {
@@ -95,17 +95,17 @@ class TitleLayout @JvmOverloads constructor(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        toolbarBack.apply {
+        titleBack.apply {
             visible(showBack)
             if (showBack) {
                 tintIcon(this, iconTintColor)
             }
         }
-        toolbarTitle.apply {
+        titleContent.apply {
             text = title
             textColor = textColor
         }
 
-        toolbarLine.visible(showLine)
+        titleDividerLine.visible(showLine)
     }
 }

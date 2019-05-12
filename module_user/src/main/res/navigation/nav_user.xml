@@ -27,4 +27,12 @@
         android:label="SignUpFragment"
         tools:layout="@layout/fragment_sign_up" />
 
+    <action
+        android:id="@+id/action_sign_to_login"
+        app:destination="@id/loginFragment"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+
 </navigation>

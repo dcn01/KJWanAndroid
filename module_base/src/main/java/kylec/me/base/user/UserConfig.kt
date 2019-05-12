@@ -1,17 +1,30 @@
 package kylec.me.base.user
 
+import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import kylec.me.base.WanAndroidApp
 import kylec.me.base.extend.d
-import kylec.me.base.helper.ServiceCreator
+import okhttp3.Cookie
+import okhttp3.OkHttpClient
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.generic.instance
 
 /**
  * User Logic Config
  *
  * Created by KYLE on 2019/5/8 - 9:25
  */
-object UserConfig {
+object UserConfig : KodeinAware {
 
-    private const val KEY_USERNAME = "loginUserName"
-    private const val KEY_TOKEN = "token_pass"
+    override val kodein: Kodein
+        get() = WanAndroidApp.INSTANCE.kodein
+
+    private val savedCookies by instance<List<Cookie>>()
+    private val okHttpClient by instance<OkHttpClient>()
+    private val persistentCookieJar by instance<PersistentCookieJar>()
+
+    private const val COOKIES_KEY_USERNAME = "loginUserName"
+    private const val COOKIES_KEY_TOKEN = "token_pass"
 
     var currentUser: User? = null
 
@@ -26,19 +39,18 @@ object UserConfig {
     fun init() {
         var username: String? = null
         var token: String? = null
-        val cookies = ServiceCreator.provideCookies()
 
         // cookie example:
         // [loginUserName_wanandroid_com=hahahaha; expires=Sat, 08 Jun 2019 04:00:56 GMT; domain=wanandroid.com; path=/, loginUserName=hahahaha; expires=Sat, 08 Jun 2019 04:00:56 GMT; path=/, token_pass=5d9b90bcb70640183e09d1e755ead823; expires=Sat, 08 Jun 2019 04:00:56 GMT; path=/, token_pass_wanandroid_com=5d9b90bcb70640183e09d1e755ead823; expires=Sat, 08 Jun 2019 04:00:56 GMT; domain=wanandroid.com; path=/]
-        d(msg = "Cookie: $cookies")
+        d(msg = "Cookie: $savedCookies")
 
-        cookies.forEach {
-            if (it.name() == KEY_USERNAME) {
+        savedCookies.forEach {
+            if (it.name() == COOKIES_KEY_USERNAME) {
                 val value = it.value()
                 if ("\"\"" != value) {
                     username = value
                 }
-            } else if (it.name() == KEY_TOKEN) {
+            } else if (it.name() == COOKIES_KEY_TOKEN) {
                 val value = it.value()
                 if ("\"\"" != value) {
                     token = value
@@ -84,9 +96,7 @@ object UserConfig {
         isLogin = false
 
         // clear cookie
-        ServiceCreator.apply {
-            okHttpClient.dispatcher().cancelAll()
-            persistentCookieJar.clear()
-        }
+        okHttpClient.dispatcher().cancelAll()
+        persistentCookieJar.clear()
     }
 }

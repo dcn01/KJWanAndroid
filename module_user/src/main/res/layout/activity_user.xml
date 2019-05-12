@@ -12,4 +12,4 @@
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:navGraph="@navigation/nav_user"
-    tools:context="kylec.me.user.ui.UserActivity" />
+    tools:context="kylec.me.user.ui.interfaces.UserActivity" />

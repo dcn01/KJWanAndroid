@@ -6,6 +6,11 @@
 
     <application>
         <activity
+            android:name=".ui.interfaces.about.AboutActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme" />
+        <activity
             android:name=".ui.SplashActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
@@ -17,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.UserActivity"
+            android:name=".ui.interfaces.UserActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
     </application>

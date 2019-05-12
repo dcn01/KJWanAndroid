@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.navigation.NavigationView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/userLeftNav"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:headerLayout="@layout/user_navigation_header"
-    app:insetForeground="@android:color/transparent"
-    app:menu="@menu/user_navigation" />
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="kylec.me.user.ui.module.UserViewModel" />
+
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/userLeftNav"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:headerLayout="@layout/user_navigation_header"
+            app:insetForeground="@android:color/transparent"
+            app:menu="@menu/user_navigation" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="34dp"
+            app:visibleGone="@{viewModel.isLoading}" />
+
+    </FrameLayout>
+
+</layout>

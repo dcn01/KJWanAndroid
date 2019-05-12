@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">用户</string>
+    <string name="app_name">用户模块</string>
 
     <string name="host_name">KJWanAndroid</string>
     <string name="sign_up">注册</string>
@@ -8,4 +8,5 @@
     <string name="user_name">用户名</string>
     <string name="login">登录</string>
     <string name="exit">退出登录</string>
+    <string name="about">关于项目</string>
 </resources>

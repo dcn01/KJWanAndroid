@@ -49,7 +49,9 @@ ext {
             kodein             : '6.2.0',
             coroutines         : '1.2.0',
 
-            krealmextensions   : '2.5.0'
+            krealmextensions   : '2.5.0',
+
+            banner             : '2.2.6'
     ]
 
     // BASIC ANDROID DEP
@@ -103,7 +105,9 @@ ext {
             "retrofit_logging_interceptor": "com.squareup.okhttp3:logging-interceptor:$versions.logging_interceptor",
             "persistentcookie"            : "com.github.franmontiel:PersistentCookieJar:$versions.persistentcookie",
 
-            "krealmextensions"            : "com.github.vicpinm:krealmextensions:$versions.krealmextensions"
+            "krealmextensions"            : "com.github.vicpinm:krealmextensions:$versions.krealmextensions",
+
+            "banner"                      : "cn.bingoogolapple:bga-banner:$versions.banner"
     ]
 
     kapts = [

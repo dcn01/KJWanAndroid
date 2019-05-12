@@ -48,13 +48,6 @@ abstract class BaseFragment : BaseAutoDisposeFragment(), View.OnTouchListener, K
         initDataAfterViewCreated(view)
     }
 
-    protected inline fun <reified T : Activity> startActivity() {
-        val intent = Intent(mContext, T::class.java)
-        startActivity(intent)
-    }
-
-    protected fun toastShort(msg: String) = mContext.toastShort(msg)
-
     /**
      * consumed. To prevent click the blanks through to the next layer
      */
@@ -77,4 +70,13 @@ abstract class BaseFragment : BaseAutoDisposeFragment(), View.OnTouchListener, K
      * @param view current view
      */
     protected open fun initDataAfterViewCreated(view: View) {}
+
+    protected inline fun <reified T : Activity> startActivity() {
+        val intent = Intent(mContext, T::class.java)
+        startActivity(intent)
+    }
+
+    protected fun toastShort(msg: String) = mContext.toastShort(msg)
+
+    protected fun finish() = mContext.finish()
 }

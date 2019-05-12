@@ -7,7 +7,7 @@ import kylec.me.base.extend.d
 /**
  * Created by KYLE on 2019/5/8 - 15:36
  */
-abstract class BaseViewModule : BaseAutoDisposeViewModel(), DefaultLifecycleObserver {
+abstract class BaseViewModel : BaseAutoDisposeViewModel(), DefaultLifecycleObserver {
 
     override fun onCreate(owner: LifecycleOwner) {
         d(tag = "ViewModule--${javaClass.simpleName}", msg = "onCreate")

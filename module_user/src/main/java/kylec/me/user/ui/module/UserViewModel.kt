@@ -10,14 +10,14 @@ import kylec.me.user.repo.UserRepository
 import kotlinx.coroutines.launch
 import kylec.me.base.extend.STRING_BLANK
 import kylec.me.base.extend.process
-import kylec.me.base.helper.SingletonHolderSingleArg
+import kylec.me.base.helper.SingletonHolderSinglePara
 import kylec.me.base.user.UserConfig
-import kylec.me.base.viewmodule.BaseViewModule
+import kylec.me.base.viewmodule.BaseViewModel
 
 /**
  * Created by KYLE on 2019/5/8 - 14:47
  */
-class UserViewModel(private val repo: UserRepository) : BaseViewModule() {
+class UserViewModel(private val repo: UserRepository) : BaseViewModel() {
 
     private var _loginErrMsg = MutableLiveData<String>()
     private var _signUpErrMsg = MutableLiveData<String>()
@@ -97,5 +97,5 @@ class UserViewModelFactory(
     override fun <T : ViewModel?> create(modelClass: Class<T>) = UserViewModel(repo) as T
 
     companion object :
-        SingletonHolderSingleArg<UserViewModelFactory, UserRepository>(::UserViewModelFactory)
+        SingletonHolderSinglePara<UserViewModelFactory, UserRepository>(::UserViewModelFactory)
 }

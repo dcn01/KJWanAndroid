@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import kylec.me.base.viewmodule.BaseViewModule
+import kylec.me.base.viewmodule.BaseViewModel
 
 /**
  * Created by KYLE on 2019/5/10 - 15:23
  */
-abstract class BaseBindingFragment<DB : ViewDataBinding, VM : BaseViewModule> : BaseFragment() {
+abstract class BaseBindingFragment<DB : ViewDataBinding, VM : BaseViewModel> : BaseFragment() {
 
     protected lateinit var binding: DB
 
