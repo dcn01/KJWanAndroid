@@ -16,7 +16,7 @@ import java.net.URLDecoder
 import java.util.concurrent.TimeUnit
 
 /**
- * User `NetModule` instated , by kd.
+ * User `NetModule` instated , by kdi.
  *
  * Created by KYLE on 2019/5/8 - 13:05
  */

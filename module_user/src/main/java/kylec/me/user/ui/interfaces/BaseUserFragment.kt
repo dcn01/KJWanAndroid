@@ -1,12 +1,11 @@
 package kylec.me.user.ui.interfaces
 
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModelProviders
+import kylec.me.base.ui.BaseBindingFragment
+import kylec.me.base.viewmodule.BaseViewModel
 import kylec.me.user.ui.module.UserViewModel
 import kylec.me.user.ui.module.UserViewModelFactory
 import kylec.me.user.ui.module.userKodeinModule
-import kylec.me.base.ui.BaseBindingFragment
-import kylec.me.base.viewmodule.BaseViewModel
 import org.kodein.di.Copy
 import org.kodein.di.Kodein
 import org.kodein.di.generic.instance
@@ -22,9 +21,7 @@ abstract class BaseUserFragment<DB : ViewDataBinding, VM : BaseViewModel> :
         import(userKodeinModule)
     }
 
-    private val factory: UserViewModelFactory by instance()
+    private val factory by instance<UserViewModelFactory>()
 
-    protected val userViewModel by lazy {
-        ViewModelProviders.of(this, factory).get(UserViewModel::class.java)
-    }
+    protected val userViewModel by lazy { UserViewModel(this, factory) }
 }

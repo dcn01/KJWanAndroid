@@ -9,29 +9,71 @@
 
     </data>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/mSwipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:onRefreshListener="@{() -> viewModel.refreshArticle()}"
+        app:refreshing="@{viewModel.isRefreshing}"
         tools:context="kylec.me.wan.ui.homepage.HomePageFragment">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/mSwipeRefreshLayout"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/mAppBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:orientation="vertical">
+
+                <!-- banner_pageChangeDuration 切换过程的时间 -->
+                <!-- banner_pointAutoPlayAble 是否开启自动轮播 -->
+                <!-- banner_pointAutoPlayInterval 自动轮播间隔时间 -->
+                <!-- banner_pointContainerBackground 指示点容器背景 -->
+                <!-- banner_indicatorGravity 指示器位置 -->
+                <!-- banner_isNeedShowIndicatorOnOnlyOnePage 只有一页数据是否显示指示器 -->
+                <!-- banner_placeholderDrawable 加载网络数据时的占位图片 -->
+                <!-- android:scaleType 占位图和资源图片缩放模式 -->
+                <!-- banner_tipTextSize 提示文案的文字大小 -->
+
+                <cn.bingoogolapple.bgabanner.BGABanner
+                    android:id="@+id/mBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    app:banner_aspectRatio="2.0"
+                    app:banner_indicatorGravity="bottom"
+                    app:banner_isNeedShowIndicatorOnOnlyOnePage="false"
+                    app:banner_isNumberIndicator="false"
+                    app:banner_pageChangeDuration="1000"
+                    app:banner_placeholderDrawable="@drawable/banner_loading"
+                    app:banner_pointAutoPlayAble="true"
+                    app:banner_pointAutoPlayInterval="5000"
+                    app:banner_pointContainerBackground="@android:color/transparent"
+                    app:banner_tipTextSize="14sp"
+                    app:banner_transitionEffect="depth"
+                    app:layout_scrollFlags="scroll" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mRecyclerViewProjectType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_scrollFlags="scroll" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/mRecyclerView"
+                android:id="@+id/mRecyclerViewArticle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbars="vertical"
-                app:layoutManager="LinearLayoutManager">
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            </androidx.recyclerview.widget.RecyclerView>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-    </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </layout>

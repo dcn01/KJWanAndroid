@@ -3,6 +3,7 @@ package kylec.me.base.user
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import kylec.me.base.WanAndroidApp
 import kylec.me.base.extend.d
+import kylec.me.base.extend.i
 import okhttp3.Cookie
 import okhttp3.OkHttpClient
 import org.kodein.di.Kodein
@@ -58,11 +59,13 @@ object UserConfig : KodeinAware {
             }
         }
 
-        d(msg = "username: $username")
-        d(msg = "token: $token")
+        i(msg = "username: $username")
+        i(msg = "token: $token")
 
         if ((null != username) and (null != token)) {
             val userFound = UserDao.queryUser(username!!)
+            i(msg = "user is $userFound")
+
             userFound?.let {
                 currentUser = userFound
                 isLogin = true

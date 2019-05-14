@@ -1,7 +1,11 @@
 package kylec.me.base.extend
 
+import android.graphics.drawable.Drawable
 import android.view.View
+import android.widget.TextView
 import androidx.annotation.IdRes
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 
 /**
@@ -27,3 +31,45 @@ fun View.visible(isVisible: Boolean) {
 fun View.snack(msg: String) = Snackbar.make(this, msg, Snackbar.LENGTH_SHORT).show()
 
 inline fun <reified T : View> View.find(@IdRes id: Int): T = findViewById(id)
+
+fun <VH : RecyclerView.ViewHolder, A : RecyclerView.Adapter<VH>> RecyclerView.init(
+    _adapter: A,
+    _layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context)
+) {
+    layoutManager = _layoutManager
+    adapter = _adapter
+}
+
+// ----------------------------- TextView ---------------------------------
+
+fun TextView.setDrawableLeft(resId: Int) {
+    setCompoundDrawablesWithIntrinsicBounds(resId, 0, 0, 0)
+}
+
+fun TextView.setDrawableLeft(res: Drawable) {
+    setCompoundDrawablesWithIntrinsicBounds(res, null, null, null)
+}
+
+fun TextView.setDrawableRight(resId: Int) {
+    setCompoundDrawablesWithIntrinsicBounds(0, 0, resId, 0)
+}
+
+fun TextView.setDrawableRight(res: Drawable) {
+    setCompoundDrawablesWithIntrinsicBounds(null, null, res, null)
+}
+
+fun TextView.setDrawableTop(resId: Int) {
+    setCompoundDrawablesWithIntrinsicBounds(0, resId, 0, 0)
+}
+
+fun TextView.setDrawableTop(res: Drawable) {
+    setCompoundDrawablesWithIntrinsicBounds(null, res, null, null)
+}
+
+fun TextView.setDrawableBottom(resId: Int) {
+    setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, resId)
+}
+
+fun TextView.setDrawableBottom(res: Drawable) {
+    setCompoundDrawablesWithIntrinsicBounds(null, null, null, res)
+}

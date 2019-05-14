@@ -15,7 +15,7 @@ open class SingletonHolderSinglePara<out TARGET, in PARA>(private val creator: (
     @Volatile
     private var instance: TARGET? = null
 
-    fun getInstance(arg: PARA): TARGET =
+    operator fun invoke(arg: PARA): TARGET =
         instance ?: synchronized(this) {
             instance ?: creator(arg).also {
                 instance = it

@@ -22,7 +22,9 @@ import java.net.URLDecoder
 import java.util.concurrent.TimeUnit
 
 /**
- * Network related. instance by kd
+ * Network related. instance by kdi
+ *
+ * Used in place of `ServiceCreator`
  *
  * Created by KYLE on 2019/5/12 - 21:00
  */

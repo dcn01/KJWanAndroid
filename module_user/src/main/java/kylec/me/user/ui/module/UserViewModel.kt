@@ -1,10 +1,12 @@
 package kylec.me.user.ui.module
 
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.viewModelScope
 import kylec.me.user.repo.UserRepository
 import kotlinx.coroutines.launch
@@ -87,6 +89,14 @@ class UserViewModel(private val repo: UserRepository) : BaseViewModel() {
                 isLoading.value = false
             }
         }
+
+    companion object {
+        operator fun invoke(fragment: Fragment, factory: UserViewModelFactory) =
+            ViewModelProviders.of(
+                fragment,
+                factory
+            ).get(UserViewModel::class.java)
+    }
 }
 
 class UserViewModelFactory(

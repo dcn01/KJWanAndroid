@@ -14,7 +14,7 @@ abstract class BaseNormalAdapter<T>(
     var data: ArrayList<T> = ArrayList()
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
-    var context: Context? = null
+    protected var context: Context? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         context = parent.context

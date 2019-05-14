@@ -2,6 +2,7 @@ package kylec.me.base.user
 
 import io.realm.RealmList
 import io.realm.RealmObject
+import io.realm.annotations.RealmModule
 import kylec.me.base.extend.STRING_BLANK
 
 /**
@@ -18,3 +19,6 @@ open class User(
     var type: Int = 0,
     var username: String = STRING_BLANK
 ) : RealmObject()
+
+@RealmModule(library = true, allClasses = true)
+class UserModule

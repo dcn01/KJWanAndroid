@@ -10,12 +10,13 @@ import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import kylec.me.base.extend.loadSimple
+import kylec.me.base.extend.setDrawableTop
 import java.lang.IllegalArgumentException
 
 /**
  * Created by KYLE on 2019/5/12 - 16:06
  */
-class BaseViewHolder(
+open class BaseViewHolder(
     parent: ViewGroup, @LayoutRes layoutId: Int
 ) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(layoutId, parent, false)) {
 
@@ -34,15 +35,28 @@ class BaseViewHolder(
     }
 
     fun setText(@IdRes viewId: Int, text: CharSequence): BaseViewHolder {
-        val textView = getView(viewId) as TextView
+        val textView = getView<TextView>(viewId)
         textView.text = text
 
         return this
     }
 
     fun setImage(@IdRes viewId: Int, url: String): BaseViewHolder {
-        val imageView = getView(viewId) as ImageView
+        val imageView = getView<ImageView>(viewId)
         imageView.loadSimple(url)
+
+        return this
+    }
+
+    fun setTextDrawableTop(@IdRes viewId: Int, drawableId: Int): BaseViewHolder {
+        val textView = getView<TextView>(viewId)
+        textView.setDrawableTop(drawableId)
+
+        return this
+    }
+
+    fun visibleGone(@IdRes viewId: Int, visible: Boolean): BaseViewHolder {
+        getView<View>(viewId).visibility = if (visible) View.VISIBLE else View.GONE
 
         return this
     }

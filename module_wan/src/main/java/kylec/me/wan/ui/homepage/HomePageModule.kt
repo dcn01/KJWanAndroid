@@ -1,7 +1,7 @@
 package kylec.me.wan.ui.homepage
 
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
+import kylec.me.wan.db.HomePageDao
 import kylec.me.wan.repo.HomeLocalDataSource
 import kylec.me.wan.repo.HomePageRepository
 import kylec.me.wan.repo.HomePageRepositoryImpl
@@ -22,18 +22,17 @@ private const val NAME_HOME_PAGE_MODULE = "HOME_PAGE_MODULE"
 val homePageKodeinModule = Kodein.Module(NAME_HOME_PAGE_MODULE) {
 
     bind<HomePageViewModel>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
-        ViewModelProviders.of(
-            context.activity!!,
-            HomePageViewModelFactory.getInstance(instance())
-        ).get(HomePageViewModel::class.java)
+        HomePageViewModel(fragment = context, repo = instance())
     }
 
+    bind() from singleton { HomePageDao() }
+
     bind<HomeRemoteDataSource>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
-        HomeRemoteDataSource()
+        HomeRemoteDataSource(instance())
     }
 
     bind<HomeLocalDataSource>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
-        HomeLocalDataSource()
+        HomeLocalDataSource(instance())
     }
 
     bind<HomePageRepository>() with singleton { HomePageRepositoryImpl(instance(), instance()) }

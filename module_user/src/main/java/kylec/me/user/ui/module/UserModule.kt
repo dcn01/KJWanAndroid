@@ -10,7 +10,7 @@ import org.kodein.di.generic.singleton
 import retrofit2.Retrofit
 
 /**
- * user module for kodein.
+ * user module for kdi.
  *
  * Created by KYLE on 2019/5/8 - 16:02
  */
@@ -25,7 +25,7 @@ val userKodeinModule = Kodein.Module(NAME_USER_MODULE) {
 
     bind<UserRepository>() with singleton { UserRepositoryImpl(instance()) }
 
-    bind() from singleton { UserViewModelFactory.getInstance(instance()) }
+    bind() from singleton { UserViewModelFactory(instance()) }
 
     // bind<UserViewModel>() with scoped<Fragment>(AndroidLifecycleScope).singleton {
     //     ViewModelProviders.of(context.activity!!, UserViewModelFactory.getInstance(instance()))
