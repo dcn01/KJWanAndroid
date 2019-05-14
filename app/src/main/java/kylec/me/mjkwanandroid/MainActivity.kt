@@ -5,7 +5,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.alibaba.android.arouter.facade.annotation.Route
 import kotlinx.android.synthetic.main.activity_main.*
 import kylec.me.base.AppManager
-import kylec.me.base.RouterPath
+import kylec.me.base.RoutePath
 import kylec.me.base.common.currentTimeMillis
 import kylec.me.base.extend.snack
 import kylec.me.base.ui.BaseActivity
@@ -16,7 +16,7 @@ import kotlin.properties.Delegates
 /**
  * Created by KYLE on 2019/5/7 - 15:17
  */
-@Route(path = RouterPath.TO_MAIN)
+@Route(path = RoutePath.TO_MAIN)
 class MainActivity(override val layoutId: Int = R.layout.activity_main) : BaseActivity() {
 
     private var isDrawerOpened = false

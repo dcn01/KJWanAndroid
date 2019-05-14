@@ -2,15 +2,17 @@ package kylec.me.wan.ui.homepage
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.gcssloop.widget.PagerGridLayoutManager
+import com.gcssloop.widget.PagerGridSnapHelper
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_home_page.*
+import kylec.me.base.Router
 import kylec.me.base.extend.d
 import kylec.me.base.extend.init
 import kylec.me.base.extend.loadComprehensive
@@ -31,6 +33,11 @@ import kotlin.random.Random
  * Created by KYLE on 2019/5/12 - 15:29
  */
 class HomePageFragment : BaseBindingFragment<FragmentHomePageBinding, HomePageViewModel>() {
+
+    private var startX = .0F
+    private var startY = .0F
+    private var enableRefresh = true
+    private var appBarOffset = 0
 
     companion object {
         fun newInstance(): Fragment = HomePageFragment()
@@ -57,8 +64,34 @@ class HomePageFragment : BaseBindingFragment<FragmentHomePageBinding, HomePageVi
 
         // solve sliding conflict
         mAppBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
-            mSwipeRefreshLayout.isEnabled = verticalOffset >= 0
+            appBarOffset = verticalOffset
+            mSwipeRefreshLayout.isEnabled = verticalOffset >= 0 && enableRefresh
         })
+
+        mRecyclerViewProjectType.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    startX = event.x
+                    startY = event.y
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    val endX = event.x
+                    val endY = event.y
+                    val distanceX = Math.abs(startX - endX)
+                    val distanceY = Math.abs(startY - endY)
+                    if (distanceX > distanceY) {
+                        mSwipeRefreshLayout.isEnabled = false
+                    }
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    enableRefresh = true
+                    mSwipeRefreshLayout.isEnabled = appBarOffset == 0 && enableRefresh
+                }
+            }
+            false
+        }
+
+        // handle data begin ------------------
 
         // simulated data 1
 
@@ -84,12 +117,10 @@ class HomePageFragment : BaseBindingFragment<FragmentHomePageBinding, HomePageVi
 
         // banner item click listener
         // mBanner.setDelegate { _, _, _, bannerPos ->
-        //     toastShort("你点击了: ${item[bannerPos].url}")
+        //     toastShort("You clicked : ${item[bannerPos].url}")
         // }
 
         // actual banner data
-
-        // set banner data
         mBanner.setAdapter { _, itemView, model, _ ->
             model?.let { (itemView as ImageView).loadComprehensive(it) }
         }
@@ -105,7 +136,7 @@ class HomePageFragment : BaseBindingFragment<FragmentHomePageBinding, HomePageVi
 
             mBanner.setData(picPaths, titles)
             mBanner.setDelegate { _, _, _, bannerPos ->
-                toastShort("You clicked : ${banners[bannerPos].url}")
+                with(banners[bannerPos]) { Router.startWebActivity(title, url) }
             }
         })
 
@@ -117,16 +148,23 @@ class HomePageFragment : BaseBindingFragment<FragmentHomePageBinding, HomePageVi
         // simulated data 2
 
         val data = arrayListOf<ProjectType>()
-        repeat(16) {
-            data.add(ProjectType(2).apply { name = "KT" })
+        repeat(30) {
+            data.add(ProjectType(2).apply { name = "New IDEA!" })
         }
 
+        // Horizontal Paging Layout Manager
+        val pagerGridLayoutManager = PagerGridLayoutManager(2, 4, PagerGridLayoutManager.HORIZONTAL)
         val projectTypeAdapter = ProjectTypeAdapter(data)
 
-        mRecyclerViewProjectType.init(
-            projectTypeAdapter,
-            GridLayoutManager(context, 4, RecyclerView.HORIZONTAL, false)
-        )
+        with(mRecyclerViewProjectType) {
+            init(projectTypeAdapter, pagerGridLayoutManager)
+            // Set up scrolling accessibility tools
+            PagerGridSnapHelper().attachToRecyclerView(this)
+        }
+
+        projectTypeAdapter.onItemClickListener = { _, item, _ ->
+            toastShort("You clicked: ${item.name}")
+        }
 
         // simulated data 3
 

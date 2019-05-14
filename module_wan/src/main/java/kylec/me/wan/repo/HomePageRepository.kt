@@ -10,7 +10,7 @@ import kylec.me.wan.model.ProjectType
  */
 interface HomePageRepository {
 
-    suspend fun obtainBannerData(): List<kylec.me.realm.Banner>
+    suspend fun obtainBannerData(): List<Banner>
 
     suspend fun obtainProjectTypeData(): HttpReturnType<ProjectType>
 

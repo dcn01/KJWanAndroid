@@ -15,7 +15,7 @@ import retrofit2.http.Path
 interface HomePageService {
 
     @GET("banner/json")
-    fun obtainBannerDataAsync(): Deferred<HttpReturnType<List<kylec.me.realm.Banner>>>
+    fun obtainBannerDataAsync(): Deferred<HttpReturnType<List<Banner>>>
 
     @GET("project/tree/json")
     fun obtainProjectTypeAsync(): Deferred<HttpReturnType<ArrayList<ProjectType>>>

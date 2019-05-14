@@ -12,11 +12,11 @@ class HomePageDao {
 
     // ----------------------- Banner ----------------------------
 
-    fun fetchBannerData() = queryAll<kylec.me.realm.Banner>()
+    fun fetchBannerData() = queryAll<Banner>()
 
-    fun saveNewBanners(banners: List<kylec.me.realm.Banner>) {
+    fun saveNewBanners(banners: List<Banner>) {
         val previousData = fetchBannerData()
-        if (previousData.isNullOrEmpty()) deleteAll<kylec.me.realm.Banner>()
+        if (previousData.isNullOrEmpty()) deleteAll<Banner>()
 
         banners.saveAll()
     }

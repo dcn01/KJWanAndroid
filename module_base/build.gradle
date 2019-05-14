@@ -96,6 +96,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     api project(':module_realm')
+    api project(':pagerlayoutmanager')
 
     api androidXLibs
     api jetpackLibs

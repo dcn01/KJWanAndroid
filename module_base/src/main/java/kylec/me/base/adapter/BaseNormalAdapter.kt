@@ -1,6 +1,7 @@
 package kylec.me.base.adapter
 
 import android.content.Context
+import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
@@ -16,9 +17,20 @@ abstract class BaseNormalAdapter<T>(
 
     protected var context: Context? = null
 
+    var onItemClickListener: ((View, T, Int) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         context = parent.context
-        return BaseViewHolder(parent, layoutId)
+        val holder = BaseViewHolder(parent, layoutId)
+        onItemClickListener?.let {
+            with(holder) {
+                itemView.setOnClickListener {
+                    it(itemView, data[adapterPosition], adapterPosition)
+                }
+            }
+        }
+
+        return holder
     }
 
     override fun getItemCount() = data.size

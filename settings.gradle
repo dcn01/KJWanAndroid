@@ -1,1 +1,1 @@
-include ':app', ':module_base', ':module_user', ':module_wan', ':module_realm'
+include ':app', ':module_base', ':module_user', ':module_wan', ':module_realm', ':pagerlayoutmanager'

@@ -25,8 +25,8 @@ class HomePageViewModel(private val repo: HomePageRepository) : BaseViewModel() 
     val bannerErrMsg: LiveData<String>
         get() = _bannerErrMsg
 
-    private var _bannerData = MutableLiveData<List<kylec.me.realm.Banner>>()
-    val bannerData: LiveData<List<kylec.me.realm.Banner>>
+    private var _bannerData = MutableLiveData<List<Banner>>()
+    val bannerData: LiveData<List<Banner>>
         get() = _bannerData
 
     init {
